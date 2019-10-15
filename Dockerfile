@@ -32,6 +32,7 @@ apt-get install -q -y \
 sed -i -E 's/^(\s*)system\(\);/\1unix-stream("\/dev\/log");/' /etc/syslog-ng/syslog-ng.conf && \
 # https://github.com/LyleScott/docker-postfix-gmail-relay/issues/1
 sed -i '/^smtp_tls_CAfile =/d' /etc/postfix/main.cf && \
+sed -i '/^inet_protocols =.*/inet_protocols = ipv4/' /etc/postfix/main.cf
 
 apt-get install -q -y \
     supervisor
