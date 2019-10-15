@@ -43,7 +43,8 @@ COPY init.sh /opt/init.sh
 #>> Cleanup
 RUN rm -rf /var/lib/apt/lists/* /tmp/* && \
 apt-get autoremove -y && \
-apt-get autoclean
+apt-get autoclean && \
+ln -sf /dev/stdout /var/log/mail.log
 
 EXPOSE 25
 
