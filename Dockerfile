@@ -37,13 +37,7 @@ sed -i 's/^inet_protocols =.*/inet_protocols = ipv4/' /etc/postfix/main.cf && \
 apt-get install -q -y \
     supervisor && \
 symlinks="active bounce corrupt defer deferred flush hold incoming maildrop saved" && \
-symlinkCommand= 
-for link in $symlinks 
-do
-  dir=/opt/spool-postfix/$link
-  mkdir -p $dir
-  ln -s $dir /var/spool/postfix/$link
-done
+for link in $symlinks ; do tardir=/opt/spool-postfix/$link ; destdir=/var/spool/postfix/$link ; mkdir -p $tardir ; rm -rf $destdir ; ln -s $tardir $destdir ; done
 
 COPY supervisord.conf /etc/supervisor/
 COPY init.sh /opt/init.sh
