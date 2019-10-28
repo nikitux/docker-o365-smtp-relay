@@ -24,6 +24,7 @@ postconf -e smtp_sasl_password_maps=hash:/etc/postfix/sasl_passwd && \
 postconf -e smtp_sasl_security_options=noanonymous && \
 postconf -e smtp_tls_CAfile=/etc/postfix/cacert.pem  && \
 postconf -e smtp_use_tls=yes && \
+postconf -e soft_bounce=yes && \
 apt-get install -q -y \
     syslog-ng \
     syslog-ng-core && \
