@@ -42,7 +42,7 @@ for link in $symlinks
 do
   dir=/opt/spool-postfix/$link
   mkdir -p $dir
-  ln -s $dir /var/spool/$link
+  ln -s $dir /var/spool/postfix/$link
 done
 
 COPY supervisord.conf /etc/supervisor/
