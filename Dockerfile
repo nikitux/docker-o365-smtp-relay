@@ -25,7 +25,6 @@ postconf -e smtp_sasl_security_options=noanonymous && \
 postconf -e smtp_tls_CAfile=/etc/postfix/cacert.pem  && \
 postconf -e smtp_use_tls=yes && \
 postconf -e soft_bounce=yes && \
-postconf -e queue_directory=/opt/spool-postfix && \
 apt-get install -q -y \
     syslog-ng \
     syslog-ng-core && \
@@ -36,9 +35,7 @@ sed -i -E 's/^(\s*)system\(\);/\1unix-stream("\/dev\/log");/' /etc/syslog-ng/sys
 sed -i '/^smtp_tls_CAfile =/d' /etc/postfix/main.cf && \
 sed -i 's/^inet_protocols =.*/inet_protocols = ipv4/' /etc/postfix/main.cf && \
 apt-get install -q -y \
-    supervisor # && \
-#symlinks="active bounce corrupt defer deferred flush hold incoming maildrop saved" && \
-#for link in $symlinks ; do tardir=/opt/spool-postfix/$link ; destdir=/var/spool/postfix/$link ; mkdir -p $tardir ; rm -rf $destdir ; ln -s $tardir $destdir ; done
+    supervisor
 
 COPY supervisord.conf /etc/supervisor/
 COPY init.sh /opt/init.sh
