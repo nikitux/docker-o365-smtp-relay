@@ -35,7 +35,15 @@ sed -i -E 's/^(\s*)system\(\);/\1unix-stream("\/dev\/log");/' /etc/syslog-ng/sys
 sed -i '/^smtp_tls_CAfile =/d' /etc/postfix/main.cf && \
 sed -i 's/^inet_protocols =.*/inet_protocols = ipv4/' /etc/postfix/main.cf && \
 apt-get install -q -y \
-    supervisor
+    supervisor && \
+symlinks="active bounce corrupt defer deferred flush hold incoming maildrop saved" && \
+symlinkCommand= 
+for link in $symlinks 
+do
+  dir=/opt/spool-postfix/$link
+  mkdir -p $dir
+  ln -s $dir /var/spool/$link
+done
 
 COPY supervisord.conf /etc/supervisor/
 COPY init.sh /opt/init.sh
