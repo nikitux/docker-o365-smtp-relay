@@ -19,7 +19,15 @@ if [ ! -z "${EMAIL}" ] && [ ! -z "${EMAILPASS}" ]; then
     echo "[SMTP.office365.com]:587    ${EMAIL}:${EMAILPASS}" > /etc/postfix/sasl_passwd
     postmap /etc/postfix/sasl_passwd
     #rm /etc/postfix/sasl_passwd
-    echo "/From:.*/ REPLACE From: $EMAIL" > /etc/postfix/header_check
+    ## remove FROM header, set reply-to, and insert FROM to be auth username
+    ## tricky because you can't match the same line twice
+    if [ ! -z "${FROMADDRESSMASQ}" ] && [ "${FROMADDRESSMASQ}" -eq 1 ] 
+    then
+        echo '/From: (.*)/ REPLACE Reply-To: ${1}' > /etc/postfix/smtp_header_checks
+        echo "/To: (.*)/ PREPEND From: $EMAIL" >> /etc/postfix/smtp_header_checks
+    else
+        echo > /etc/postfix/smtp_header_checks
+    fi
     echo "postfix EMAIL/EMAILPASS combo is setup."
 else
     echo "EMAIL or EMAILPASS not set!"
