@@ -19,6 +19,7 @@ if [ ! -z "${EMAIL}" ] && [ ! -z "${EMAILPASS}" ]; then
     echo "[SMTP.office365.com]:587    ${EMAIL}:${EMAILPASS}" > /etc/postfix/sasl_passwd
     postmap /etc/postfix/sasl_passwd
     #rm /etc/postfix/sasl_passwd
+    echo "/From:.*/ REPLACE From: $EMAIL" > /etc/postfix/header_check
     echo "postfix EMAIL/EMAILPASS combo is setup."
 else
     echo "EMAIL or EMAILPASS not set!"
