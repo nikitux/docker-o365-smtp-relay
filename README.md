@@ -26,7 +26,7 @@ docker stop smtp-relay && docker rm smtp-relay
 ```
 
 
-# Paremeters
+# Parameters
 
  - FROMADDRESSMASQ
    - Set to `1` if you want the `From:` header to be rewritten to be the authenticated user. If this is set, the original `From:` address will be set to be the `Reply-To:` address.
