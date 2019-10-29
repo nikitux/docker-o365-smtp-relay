@@ -24,3 +24,11 @@ sendemail -f jim@bbc.com -t jim@bbc.com -u subject -m "RelayedViaOffice365" -s l
 # Stop (and remove otherwise the name is help on to)
 docker stop smtp-relay && docker rm smtp-relay
 ```
+
+
+# Paremeters
+
+ - FROMADDRESSMASQ
+   - Set to `1` if you want the `From:` header to be rewritten to be the authenticated user. If this is set, the original `From:` address will be set to be the `Reply-To:` address.
+ - MYNETWORKS
+   - Space-separated list of networks to allow relay from
