@@ -25,6 +25,7 @@ postconf -e smtp_sasl_security_options=noanonymous && \
 postconf -e smtp_tls_CAfile=/etc/postfix/cacert.pem  && \
 postconf -e smtp_use_tls=yes && \
 postconf -e soft_bounce=yes && \
+postconf -e smtp_header_checks=regexp:/etc/postfix/header_check && \
 apt-get install -q -y \
     syslog-ng \
     syslog-ng-core && \
