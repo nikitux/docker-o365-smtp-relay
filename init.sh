@@ -23,8 +23,8 @@ if [ ! -z "${EMAIL}" ] && [ ! -z "${EMAILPASS}" ]; then
     ## tricky because you can't match the same line twice
     if [ ! -z "${FROMADDRESSMASQ}" ] && [ "${FROMADDRESSMASQ}" -eq 1 ] 
     then
-        echo '/From: (.*)/ REPLACE Reply-To: ${1}' > /etc/postfix/smtp_header_checks
-        echo "/To: (.*)/ PREPEND From: $EMAIL" >> /etc/postfix/smtp_header_checks
+        echo '/From:(.*)/ REPLACE Reply-To:${1}' > /etc/postfix/smtp_header_checks
+        echo "/To:(.*)/ PREPEND From: $EMAIL" >> /etc/postfix/smtp_header_checks
     else
         echo > /etc/postfix/smtp_header_checks
     fi
