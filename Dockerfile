@@ -1,5 +1,5 @@
-FROM ubuntu:14.04
-MAINTAINER Lyle Scott, III "lyle@digitalfoo.net"
+FROM ubuntu:16.04
+MAINTAINER nikitux "nikitux@gmail.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -26,6 +26,7 @@ postconf -e smtp_tls_CAfile=/etc/postfix/cacert.pem  && \
 postconf -e smtp_use_tls=yes && \
 postconf -e soft_bounce=yes && \
 postconf -e smtp_header_checks=regexp:/etc/postfix/smtp_header_checks && \
+postconf -e compatibility_level=2 && \
 apt-get install -q -y \
     syslog-ng \
     syslog-ng-core && \

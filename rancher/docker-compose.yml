@@ -1,0 +1,14 @@
+version: '2'
+services:
+  o365-smtp-relay:
+    image: nikitux/o365-smtp-relay:v1.0
+    environment:
+      EMAIL: user@example.com
+      EMAILPASS: password
+      MYNETWORKS: 10.0.0.0/8 192.168.0.0/16 172.0.0.0/8 
+      SYSTEM_TIMEZONE: America/Argentina/Buenos_Aires
+    ports:
+    - 25:25/tcp
+    labels:
+      io.rancher.scheduler.affinity:host_label: o365=true
+
